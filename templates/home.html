@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>{% block title %} {% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" rel="stylesheet"
+          type="text/css"/>
+
+</head>
+<br>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                {% if session %}
+                <li>
+                    <a href="/">Logout <b>({{ name }})</b></a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/login">Login </a>
+                </li>
+                <li>
+                    <a href="/register">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% if text != None %}
+    <div class="px-5 py-3 mx-auto">
+      <h1 class="display-7" style="text-align:center">Your Notes <a style="font-size:50%" href="/{{ session }}/new_note">
+          (Add new Note)</a> </h1>
+    </div>
+    </br></br></br>
+    <div style="  margin-right: 120px; margin-left: 120px;">
+        <table class="table table-hover rounded" style="background-color: white">
+            <thead style="color:white; background-color: #404040">
+                <tr>
+                    <td style="text-align: center; font-size:150%">Note</td>
+                    <td style="text-align: center; font-size:150%">Created on</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for note, created_at in text %}
+                <tr >
+                    <td style="width: 70%; text-align: center; font-size: 150%">{{ note }}</td>
+                    <td style="width: 30%; text-align: center; font-size: 150%">{{ created_at }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% block content %} {% endblock %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
